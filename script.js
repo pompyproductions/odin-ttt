@@ -29,6 +29,9 @@ const Game = (function () {
     ]
     let nextPlayer = 0;
     let currentTurn = 0;
+    const getPlayerSymbol = () => {
+        return players[nextPlayer].symbol
+    }
 
 })();
 
@@ -36,7 +39,7 @@ const Board = (function () {
     const domElement = document.querySelector(".game-board");
     const currentBoard = [];
     for (let i = 0; i < 9; i++) {
-        currentBoard.append(Cell());
+        currentBoard.push(Cell());
     }
     const placeSymbol = (sym) => {
         return sym;
@@ -50,7 +53,8 @@ const Board = (function () {
     }
     return {
         getCell,
-        setCell
+        setCell,
+        domElement
     }
 })();
 
@@ -60,7 +64,7 @@ function handleBoardClick(e) {
     if (e.target.classList.contains("game-square")) {
         const cellNumber = Number(e.target.getAttribute("data-cell"));
         if (!Board.getCell(cellNumber)) {
-
+            // Board.setCell(cellNumber, Game.) CONTINUE HERE
         }
         console.log({
         })
