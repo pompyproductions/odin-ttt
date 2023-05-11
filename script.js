@@ -26,36 +26,23 @@ const Game = (function () {
     const players = [
         Player("pompy", "&#9671;"),
         Player("jeff", "&#9672;")
-    ]
+    ];
+    const board = [];
+    const boardElement = document.querySelector(".game-board");
+    for (let i = 0; i < 9; i++) {
+        currentBoard.push(Cell());
+    };
+
     let nextPlayer = 0;
     let currentTurn = 0;
     const getPlayerSymbol = () => {
         return players[nextPlayer].symbol
     }
 
-})();
-
-const Board = (function () {
-    const domElement = document.querySelector(".game-board");
-    const currentBoard = [];
-    for (let i = 0; i < 9; i++) {
-        currentBoard.push(Cell());
-    }
-    const placeSymbol = (sym) => {
-        return sym;
-    }
-    const getCell = (cell) => {
-        return currentBoard[cell];
-    }
-    const setCell = (cell, player) => {
-        getCell(cell); //CONTINUE HERE
-
-    }
     return {
-        getCell,
-        setCell,
-        domElement
+        boardElement,
     }
+
 })();
 
 // event handlers
