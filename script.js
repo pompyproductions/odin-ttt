@@ -25,7 +25,7 @@ function Cell() {
 const Game = (function () {
     const players = [
         Player("pompy", "\u{25C6}"),
-        Player("jeff", "&#9672;")
+        Player("jeff", "\u{25C7}")
     ];
     const board = [];
     const boardElement = document.querySelector(".game-board");
@@ -36,8 +36,13 @@ const Game = (function () {
         if (board[cellNo].getContent()) return false;
         console.log(cellNo);
         board[cellNo].setContent(players[nextPlayer]);
-        console.log(boardElement.children[cellNo]);
         boardElement.children[cellNo].textContent = players[nextPlayer].symbol;
+        nextPlayer++;
+        if (nextPlayer === 2) {
+            nextPlayer = 0;
+            currentTurn++;
+        }
+        console.log(boardElement.children[cellNo]);
         return true;
 
     }
@@ -64,9 +69,9 @@ function handleBoardClick(e) {
         const cellNo = Number(e.target.getAttribute("data-cell"));
         const symbol = Game.setCell(cellNo);
         if (symbol) {
-            alert("set cell");
+            console.log("set cell");
         } else {
-            alert("already occupied")
+            console.log("already occupied")
         }
         console.log({
         })
