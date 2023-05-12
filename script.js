@@ -7,14 +7,14 @@ function Player(name, symbol) {
 }
 
 function Cell() {
+    let content = "";
     const setContent = (player) => {
-        this.content = player.symbol;
+        content = player.symbol;
     }
     const getContent = () => {
-        return this.content;
+        return content;
     }
     return {
-        content: "",
         setContent,
         getContent
     }
@@ -24,14 +24,23 @@ function Cell() {
 
 const Game = (function () {
     const players = [
-        Player("pompy", "&#9671;"),
+        Player("pompy", "\u{25C6}"),
         Player("jeff", "&#9672;")
     ];
     const board = [];
     const boardElement = document.querySelector(".game-board");
     for (let i = 0; i < 9; i++) {
-        currentBoard.push(Cell());
+        board.push(Cell());
     };
+    const setCell = (cellNo) => {
+        if (board[cellNo].getContent()) return false;
+        console.log(cellNo);
+        board[cellNo].setContent(players[nextPlayer]);
+        console.log(boardElement.children[cellNo]);
+        boardElement.children[cellNo].textContent = players[nextPlayer].symbol;
+        return true;
+
+    }
 
     let nextPlayer = 0;
     let currentTurn = 0;
@@ -39,8 +48,11 @@ const Game = (function () {
         return players[nextPlayer].symbol
     }
 
+
     return {
-        boardElement,
+        setCell,
+        board,
+        boardElement
     }
 
 })();
@@ -49,13 +61,16 @@ const Game = (function () {
 
 function handleBoardClick(e) {
     if (e.target.classList.contains("game-square")) {
-        const cellNumber = Number(e.target.getAttribute("data-cell"));
-        if (!Board.getCell(cellNumber)) {
-            // Board.setCell(cellNumber, Game.) CONTINUE HERE
+        const cellNo = Number(e.target.getAttribute("data-cell"));
+        const symbol = Game.setCell(cellNo);
+        if (symbol) {
+            alert("set cell");
+        } else {
+            alert("already occupied")
         }
         console.log({
         })
     }
 }
 
-Board.domElement.addEventListener("click", handleBoardClick);
+Game.boardElement.addEventListener("click", handleBoardClick);
