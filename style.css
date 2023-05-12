@@ -25,11 +25,10 @@ body {
 
 .game-board {
     display: grid;
-    height: 12rem;
-    width: 12rem;
     background-color: var(--dark-blue);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 4rem);
+    grid-template-rows: repeat(3, 4rem);
     gap: 1rem;
 }
 
@@ -38,4 +37,5 @@ body {
     background-color: var(--black);
     display: grid;
     place-items: center;
+    font-size: 1.6rem;
 }
