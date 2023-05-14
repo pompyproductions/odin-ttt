@@ -88,6 +88,7 @@ function handleBoardClick(e) {
     if (e.target.classList.contains("game-square")) {
         const cellNo = Number(e.target.getAttribute("data-cell"));
         Game.setCell(cellNo);
+        e.target.classList.add("pressed");
     }
 }
 
