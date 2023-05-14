@@ -68,6 +68,9 @@ const Game = (function () {
             (board[2].getContent() === sym && board[6].getContent() === sym)
         );
     }
+    function getPlayer(i) {
+        return players[i];
+    }
 
     let nextPlayer = 0;
     let currentTurn = 0;
@@ -78,6 +81,7 @@ const Game = (function () {
     return {
         setCell,
         board,
+        getPlayer,
         boardElement,
     };
 })();
@@ -93,3 +97,8 @@ function handleBoardClick(e) {
 }
 
 Game.boardElement.addEventListener("click", handleBoardClick);
+
+for (let i = 0; i < 2; i++) {
+    document.querySelector(".controls.top").children[i].textContent = `\
+        ${Game.getPlayer(i).name} (${Game.getPlayer(i).symbol})`;
+}
